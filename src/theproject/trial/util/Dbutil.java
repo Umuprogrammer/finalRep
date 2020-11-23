@@ -20,7 +20,7 @@ public class Dbutil {
 		}
 	}
 	// update, insert, delete
-	private static void  update(String sql) throws SQLException {
+	public static void  update(String sql) throws SQLException {
 		getConnection();
 		Statement stmt= con.createStatement();
 		stmt.execute(sql);
@@ -34,7 +34,7 @@ public class Dbutil {
 		Statement stmt=con.createStatement();
 		rs=stmt.executeQuery(sql);
 		rs.next();
-		Object o=rs.getObject(2);
+		Object o=rs.getObject(1);
 		return o;
 	}
 
@@ -74,7 +74,7 @@ public class Dbutil {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	
-		String sql="select * from users";
+		String sql="select count( * ) from users";
 		
 		System.out.println(executeScalar(sql));
 		System.out.print(rs.getInt(1)+rs.getString(2)+rs.getString(3)+rs.getString(4));
