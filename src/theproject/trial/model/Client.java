@@ -8,7 +8,15 @@ public class Client  extends Functionalities{
 	private String username;
 	private String email;
 	private String pwd;
-	public static  boolean loggedIn;
+	private static  boolean loggedIn;
+	public static void setLoggedIn(boolean loggedIn) {
+		Client.loggedIn = loggedIn;
+	}
+
+	public static boolean isLoggedIn() {
+		return loggedIn;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -23,8 +31,9 @@ public class Client  extends Functionalities{
 		return pwd;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void changePassword(String newPassword) throws Exception {
+		
+		this.pwd = ClientODA.changePassword(this, newPassword);
 	}
 
 	public String getUsername() {
@@ -46,10 +55,14 @@ public class Client  extends Functionalities{
 		
 		ClientODA.signIn(username, password);
 	}
-	public static void signUp(String username,String password,String email) {
+	public static void signUp(String username,String password,String email) throws Exception {
+		ClientODA.signUp(username, email, password);
+	}
+	public static Client signOut() throws Exception {
+		return new Client();
 		
 	}
-	public Client() {
+	private Client() {
 		
 		this.id=new String();
 		this.email=new String();
